@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>JUANFLIX - Reseña</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root { --juanflix-bg: #141414; --juanflix-card: #1f1f1f; --juanflix-green: #46d369; --text-main: #ffffff; --text-muted: #b3b3b3; }
+        body { background-color: var(--juanflix-bg); color: var(--text-main); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        a { text-decoration: none; color: white; transition: 0.3s; }
+        .navbar { background-color: #0b0b0b; padding: 15px 4%; border-bottom: 1px solid #333; }
+        .navbar-brand { font-weight: 800; font-size: 1.8rem; letter-spacing: 1px; color: white !important; }
+        .nav-link { color: #e5e5e5 !important; font-weight: 500; margin-right: 15px; }
+        
+        .movie-banner { position: relative; width: 100%; height: 65vh; background-size: cover; background-position: center; }
+        .banner-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--juanflix-bg) 10%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.3) 100%); display: flex; align-items: flex-end; padding: 0 4% 50px 4%; }
+        
+        .poster-card { border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.6); border: 1px solid #333; margin-top: -100px; position: relative; z-index: 10; }
+        .poster-card img { width: 100%; display: block; }
+        
+        .review-card { background-color: var(--juanflix-card); border-radius: 10px; padding: 25px; margin-bottom: 20px; border: 1px solid #333; }
+        .review-card.my-review { border: 1px solid var(--juanflix-green); background-color: #152e1b; }
+        .reviewer-stars { color: var(--juanflix-green); }
+        .btn-action { background: none; border: none; color: #666; cursor: pointer; transition: 0.2s; }
+        .btn-action:hover { color: white; }
+        .btn-action.text-danger:hover { color: #ff6b6b !important; }
+
+
+    .user-avatar-nav {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      margin-left: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <header id="header" class="fixed-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../plataforma.html">JUANFLIX</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+                        <li class="nav-item"><a class="nav-link" href="../plataforma.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../movie.html">Películas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../serie.html">Series</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../explorar.html">Explorar</a></li>
+                       
+
+                     
+                    </ul>
+
+
+                    <div class="d-flex align-items-center nav-icons">
+                        <a href="explorar.html">
+                        <div class="dropdown">
+                            <a href="#" role="button" data-bs-toggle="dropdown">
+                                <img src="https://cdn.id.supercell.com/assets/web/portraits/0,chicken,FF6100,EDD566.png"
+                                    alt="Perfil" class="user-avatar-nav">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end mt-3">
+                                <li><a class="dropdown-item" href="../perfil.html">Mi Perfil</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="../index.html">Cerrar Sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="movie-banner" id="bannerBg">
+            <div class="banner-overlay">
+                <div class="banner-content container-fluid">
+                    <div class="mb-3"><a href="../explorar.html" class="btn btn-sm btn-outline-light rounded-pill px-3"><i class="bi bi-arrow-left me-1"></i> Volver</a></div>
+                    <span class="badge bg-warning text-dark mb-2 fw-bold" id="movieCategory">Categoría</span>
+                    <h1 id="movieTitle">Cargando...</h1>
+                    <div class="banner-meta">
+                        <span id="movieYear">Año</span> • <span id="movieDirector">Director</span>
+                    </div>
+                    <div class="banner-rating d-flex align-items-center">
+                        <i class="bi bi-star-fill text-success me-2"></i> <span class="text-white fs-4 fw-light" id="movieRating">0.0</span>
+                    </div>
+                    <div class="mt-2">
+                        <a href="#" target="_blank" id="btnTrailer" class="btn btn-success fw-bold px-4 py-2 me-2" style="background-color: var(--juanflix-green); color: black; border: none;"><i class="bi bi-play-fill fs-5"></i> Ver Trailer</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br><br>
+        <section class="movie-info-section container" style="padding: 40px 4%;">
+            <div class="row">
+                <div class="col-md-4 col-lg-3">
+                    <div class="poster-card mb-4"><img src="" id="moviePoster" alt="Poster"></div>
+                </div>
+                <div class="col-md-8 col-lg-9 ps-lg-5 pt-4 pt-md-0">
+                    <h2 class="fw-bold mb-3 text-white">Sinopsis</h2>
+                    <p class="text-light mb-5" style="line-height: 1.8; opacity: 0.9;" id="movieDesc"></p>
+
+                    <div class="d-flex justify-content-between align-items-end mb-4 border-bottom border-secondary pb-3">
+                        <h3 class="fw-bold mb-0 text-white">Reseñas <span class="text-success fs-5" id="reviewCountSpan">(0)</span></h3>
+                        <button id="btnWriteReview" class="btn btn-sm btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#writeReviewModal"><i class="bi bi-pencil-square"></i> Escribir Reseña</button>
+                    </div>
+
+                    <div id="reviewsList"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL ESCRIBIR -->
+    <div class="modal fade" id="writeReviewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold">Tu Opinión</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="reviewForm">
+                        <!-- NOMBRE FIJO Y NO EDITABLE -->
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">Nombre de Usuario</label>
+                            <input type="text" id="inputName" class="form-control bg-secondary text-white border-0 fw-bold" value="Juan Angel" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <select id="inputStars" class="form-select bg-secondary text-white border-0">
+                                <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
+                                <option value="4">⭐⭐⭐⭐ (Buena)</option>
+                                <option value="3">⭐⭐⭐ (Regular)</option>
+                                <option value="2">⭐⭐ (Mala)</option>
+                                <option value="1">⭐ (Muy Mala)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3"><textarea id="inputText" class="form-control bg-secondary text-white border-0" rows="3" required placeholder="¿Qué te pareció?"></textarea></div>
+                        <button type="submit" class="btn btn-success w-100 fw-bold">Publicar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../peliculas.js"></script>
+
+    <script>
+        // 1. CARGA DE DATOS BÁSICOS
+        const params = new URLSearchParams(window.location.search);
+        const movieId = params.get('id');
+        const movie = moviesDB[movieId] || moviesDB[0];
+
+        document.title = `JUANFLIX - ${movie.title}`;
+        document.getElementById('movieTitle').innerText = movie.title;
+        document.getElementById('bannerBg').style.backgroundImage = `url('${movie.img}')`;
+        document.getElementById('movieCategory').innerText = movie.category.join(' / ');
+        document.getElementById('movieYear').innerText = movie.year || "N/A";
+        document.getElementById('movieDirector').innerText = movie.director || "Desconocido";
+        document.getElementById('movieRating').innerText = movie.rating;
+        document.getElementById('moviePoster').src = movie.img;
+        document.getElementById('movieDesc').innerText = movie.description || "Sin descripción disponible.";
+        document.getElementById('btnTrailer').href = movie.trailer || "#";
+
+        // CLAVES DE ALMACENAMIENTO ÚNICAS POR PELÍCULA
+        const STORAGE_KEY = `juanflix_review_${movieId}`; // Tu reseña
+        const FAKE_REVIEWS_KEY = `juanflix_fake_${movieId}`; // Reseñas ficticias
+
+        const reviewForm = document.getElementById('reviewForm');
+        const reviewsList = document.getElementById('reviewsList');
+        const btnWriteReview = document.getElementById('btnWriteReview');
+        const writeReviewModal = new bootstrap.Modal(document.getElementById('writeReviewModal'));
+
+        // 2. BANCO DE COMENTARIOS
+        const commentBank = {
+            excelente: ["Una obra maestra absoluta.", "Impresionante.", "De lo mejor que he visto.", "Un 10/10.", "Simplemente increíble.", "Joder, es cine.", "Lloré al verla.", "A mi familia le encantó."],
+            buena: ["Muy buena película.", "Entretenida y bien hecha.", "Me gustó bastante.", "Sólida, con buenas actuaciones.", "Una experiencia agradable.", "Está bien.", "Podría mejorar, pero ok."],
+            regular: ["Para pasar el rato.", "Tiene buenas ideas pero falla.", "Ni buena ni mala.", "Esperaba más.", "Visualmente linda, historia floja.", "Pasable.", "No me enganchó del todo."],
+            mala: ["Una decepción total.", "Aburrida y lenta.", "Sin presupuesto.", "Me dormí.", "Guion desastroso.", "No la recomiendo.", "Un completo desastre."]
+        };
+
+        const randomNames = ["Cinefilo_23", "Maria_G", "JuanPerez", "MovieLover", "Critico_X", "Ana_Bel", "DarkKnight", "GhibliFan", "Usuario99", "Sofia_M", "EstrellaPop", "MaximoCine"];
+
+        // 3. GENERADOR DE RESEÑAS ÚNICAS
+        function generateFakeReviews(rating) {
+            let type = 'regular';
+            if (rating >= 4.5) type = 'excelente';
+            else if (rating >= 3.5) type = 'buena';
+            else if (rating >= 2.5) type = 'regular';
+            else type = 'mala';
+
+            const generated = [];
+            const availableNames = [...randomNames];
+            const availableComments = [...commentBank[type]];
+            const numReviewsToGenerate = Math.min(4, availableNames.length, availableComments.length);
+
+            for (let i = 0; i < numReviewsToGenerate; i++) {
+                const randomNameIndex = Math.floor(Math.random() * availableNames.length);
+                const chosenName = availableNames.splice(randomNameIndex, 1)[0];
+
+                const randomCommentIndex = Math.floor(Math.random() * availableComments.length);
+                const chosenText = availableComments.splice(randomCommentIndex, 1)[0];
+
+                let starVar = Math.round(rating + (Math.random() * 1.5 - 0.75));
+                if (starVar > 5) starVar = 5;
+                if (starVar < 1) starVar = 1;
+
+                const daysAgo = Math.floor(Math.random() * 90) + 1;
+                const gender = Math.random() > 0.5 ? 'men' : 'women';
+                const photoId = Math.floor(Math.random() * 99);
+
+                generated.push({
+                    name: chosenName,
+                    stars: starVar,
+                    text: chosenText,
+                    date: `Hace ${daysAgo} días`,
+                    avatarUrl: `https://randomuser.me/api/portraits/${gender}/${photoId}.jpg`
+                });
+            }
+            return generated;
+        }
+
+        // 4. OBTENER RESEÑAS FALSAS (Si no existen, las crea y guarda)
+        function getFakeReviews() {
+            const storedFakes = localStorage.getItem(FAKE_REVIEWS_KEY);
+            if (storedFakes) {
+                return JSON.parse(storedFakes);
+            } else {
+                const newFakes = generateFakeReviews(movie.rating);
+                localStorage.setItem(FAKE_REVIEWS_KEY, JSON.stringify(newFakes));
+                return newFakes;
+            }
+        }
+
+        // 5. RENDERIZADO
+        function renderAllReviews() {
+            reviewsList.innerHTML = '';
+            let currentReviewCount = 0;
+
+            // A. Tu reseña (si existe)
+            const savedReview = localStorage.getItem(STORAGE_KEY);
+            if (savedReview) {
+                const data = JSON.parse(savedReview);
+                renderCard(data, true); // true = ES MIA
+                btnWriteReview.style.display = 'none';
+                currentReviewCount++;
+            } else {
+                btnWriteReview.style.display = 'block';
+            }
+
+            // B. Reseñas Ficticias (Persistentes)
+            const fakeReviews = getFakeReviews();
+            fakeReviews.forEach(rev => {
+                renderCard(rev, false); // false = NO ES MIA
+                currentReviewCount++;
+            });
+            
+            document.getElementById('reviewCountSpan').innerText = `(${currentReviewCount})`;
+        }
+
+        // FUNCIÓN TARJETA
+        function renderCard(data, isMine) {
+            let starsHTML = '';
+            for(let i=0; i<Math.floor(data.stars); i++) starsHTML += '<i class="bi bi-star-fill"></i>';
+
+            // IMAGEN
+            const myAvatar = "https://cdn.id.supercell.com/assets/web/portraits/0,chicken,FF6100,EDD566.png";
+            const finalAvatar = isMine ? myAvatar : data.avatarUrl;
+
+            const myClass = isMine ? 'my-review' : '';
+            const badge = isMine ? '<span class="badge bg-success ms-2" style="font-size:0.7rem">Tú</span>' : '';
+
+            // --- LÓGICA DE BOTONES ---
+            let actionButton = '';
+
+            if (isMine) {
+                actionButton = `<button class="btn-action text-danger" onclick="deleteMyReview()" title="Borrar"><i class="bi bi-trash"></i></button>`;
+            } else {
+                actionButton = `<button class="btn-action" onclick="alert('Reseña reportada a administración.')" title="Reportar"><i class="bi bi-flag"></i></button>`;
+            }
+
+            const html = `
+                <div class="review-card ${myClass}">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div style="width:40px; height:40px; border-radius:50%; margin-right:15px; overflow:hidden; background:#333;">
+                                <img src="${finalAvatar}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://ui-avatars.com/api/?name=${data.name}&background=random'">    
+                            </div>
+                            <div>
+                                <div class="fw-bold text-white">${data.name} ${badge}</div>
+                                <div class="small text-white">${data.date}</div>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="reviewer-stars">${starsHTML}</div>
+                            <div class="mt-2">
+                                ${actionButton}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-light" style="font-weight:300;">"${data.text}"</div>
+                </div>
+            `;
+            reviewsList.insertAdjacentHTML('beforeend', html);
+        }
+
+        // GUARDAR (SIN RECARGA)
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // <--- ESTO EVITA QUE LA PAGINA SE RECARGUE
+
+            // FECHA ACTUAL
+            const hoy = new Date();
+            const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
+            const fechaFormateada = `Publicado el ${hoy.toLocaleDateString('es-ES', opciones)}`;
+
+            const newReview = {
+                name: document.getElementById('inputName').value,
+                stars: document.getElementById('inputStars').value,
+                text: document.getElementById('inputText').value,
+                date: fechaFormateada
+            };
+
+            // Guardar en Storage
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(newReview));
+            
+            // Renderizar de nuevo sin recargar
+            renderAllReviews();
+            
+            // Cerrar modal
+            writeReviewModal.hide();
+            reviewForm.reset(); 
+        });
+
+        // BORRAR
+        window.deleteMyReview = function() {
+            if(confirm("¿Borrar tu reseña de forma permanente?")) {
+                localStorage.removeItem(STORAGE_KEY);
+                renderAllReviews();
+            }
+        };
+
+        renderAllReviews();
+    </script>
+</body>
+</html>

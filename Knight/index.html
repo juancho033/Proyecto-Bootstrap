@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>JUANFLIX - INICIO</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo juanflix.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+
+  <style>
+    .text-custom-justify {
+      text-align: justify !important;
+    }
+
+
+
+.header-social-links {
+  display: flex;
+  gap: 20px;
+  padding: 40px; 
+}
+
+
+.header-social-links a {
+  position: relative;
+  font-size: 24px;
+  color: #333;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.header-social-links a .egg-img {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  width: 120px;
+  opacity: 0;
+  pointer-events: none; 
+  transform: translateX(-50%) translateY(-10px) scale(0.8);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 10;
+}
+
+/* 4. Efecto Hover */
+.header-social-links a:hover .egg-img {
+  opacity: 1;
+  transform: translateX(-50%) translateY(10px) scale(1.1); 
+}
+  </style>
+
+
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">JUANFLIX</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Inicio</a></li>
+          <li><a href="#about">Sobre Nosotros</a></li>
+          <li><a href="#services">Servicios</a></li>
+          <li><a href="#team">Equipo</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#contact">Contacto</a></li>
+          <li>
+            <a class="cta-btn align-middle" href="registro.html">Regístrate ahora</a>
+          </li>
+
+          <li>
+            <a class="cta-btn align-middle" href="iniciarsesion.html">Iniciar sesion</a>
+          </li>
+
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div class="header-social-links">
+
+        <a href="#" class="twitter">
+          <img
+            src="https://images7.memedroid.com/images/UPLOADED213/63f303757e38e.jpeg"
+            class="egg-img" alt="no-hace-nada">
+          <i class="bi bi-twitter-x"></i>
+        </a>
+
+        <a href="#" class="facebook">
+          <img src="https://images7.memedroid.com/images/UPLOADED213/63f303757e38e.jpeg" class="egg-img" alt="egg">
+          <i class="bi bi-facebook"></i>
+        </a>
+
+        <a href="#" class="instagram">
+          <img src="https://images7.memedroid.com/images/UPLOADED213/63f303757e38e.jpeg" class="egg-img" alt="egg">
+          <i class="bi bi-instagram"></i>
+        </a>
+
+        <a href="#" class="linkedin">
+          <img src="https://images7.memedroid.com/images/UPLOADED213/63f303757e38e.jpeg" class="egg-img" alt="egg">
+          <i class="bi bi-linkedin"></i>
+        </a>
+
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <div class="container text-center">
+        <div class="row justify-content-center" data-aos="zoom-out">
+          <div class="col-lg-8">
+            <img src="assets/img/logo juanflix.png" alt="" class="img-fluid mb-3" width="300px">
+            <h2>Bienvenido a JUANFLIX</h2>
+            <p>El Lugar Donde las Reseñas Autenticas Cobran Fuerza</p>
+            <a href="#about" class="btn-get-started fw-bold">Sobre Nosotros</a>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Sobre Nosotros</h2>
+        <p>En JuanFlix creemos que todos deberían poder compartir su opinión sobre el cine sin límites. Por eso creamos
+          una plataforma abierta, sencilla y completamente gratuita donde cualquier persona puede descubrir nuevas
+          películas, leer reseñas honestas y publicar sus propias críticas sin necesidad de pagar suscripciones.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+          <div class="col-lg-6">
+            <img src="assets/img/nosotros.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 content">
+            <h3>Nuestra misión</h3>
+            <p class="fst-italic text-custom-justify">
+              Ofrecemos un espacio creado por y para los amantes del cine, donde cada reseña, comentario o recomendación
+              aporta valor real a la comunidad. Queremos que cada usuario se sienta acompañado a decidir qué ver,
+              descubrir nuevas historias y mantenerse informado sobre lo último del mundo cinematográfico.
+            </p>
+            <ul>
+              <li class="text-custom-justify"><i class="bi bi-check2-all"></i> <span>Comunidad abierta donde cualquiera
+                  puede escribir reseñas sin
+                  costo.</span>
+              </li>
+              <li class="text-custom-justify"><i class="bi bi-check2-all"></i> <span>Noticias, estrenos y novedades
+                  actualizadas para mantenerte al
+                  día.</span></li>
+              <li class="text-custom-justify"><i class="bi bi-check2-all"></i> <span>Opiniones reales y variadas, sin
+                  filtros ni
+                  favoritismos.</span></li>
+            </ul>
+            <p>
+
+            <p class="text-custom-justify">En JuanFlix creemos que el cine es una herramienta poderosa que transforma,
+              inspira y conecta. Cada
+              película es una historia que despierta emociones, y cada espectador vive una experiencia única. Por eso,
+              nuestro objetivo es crear un espacio que respete y celebre esa diversidad de miradas. Queremos que, al
+              entrar a la plataforma, encuentres un lugar cálido, cercano y lleno de contenido útil que te ayude a
+              expandir tu amor por el séptimo arte.</p>
+
+            <p class="text-custom-justify">Nuestro deseo es que descubras películas que nunca habías imaginado ver, que
+              explores géneros distintos a
+              los habituales, que encuentres recomendaciones valiosas y que disfrutes de un espacio donde puedas
+              expresarte sin límites. Aquí puedes comentar, opinar, analizar, debatir y compartir tu punto de vista con
+              total libertad, sabiendo que cada palabra tuya puede ayudar a alguien más a vivir una gran experiencia
+              cinematográfica.</p>
+
+            <p class="text-custom-justify">Además, trabajamos para construir una comunidad donde reine el respeto, el
+              intercambio de ideas y la
+              pasión por el cine. Buscamos que este sea un sitio donde no solo consumas información, sino donde también
+              aportes tu visión personal del arte audiovisual. Cada opinión, por pequeña que sea, suma al conocimiento
+              colectivo y enriquece la experiencia de quienes visitan la plataforma.</p>
+
+            <p class="text-custom-justify">Queremos que JuanFlix sea más que una página de reseñas: deseamos
+              convertirnos en tu compañero de viaje
+              en
+              el mundo del cine. Un espacio donde puedas aprender, descubrir, recordar clásicos, seguir estrenos,
+              formarte criterio propio y conectar con personas que comparten tus mismos intereses. Aquí no existe la
+              “opinión correcta”, existe la libertad de expresión, el intercambio de ideas y la posibilidad de crecer
+              como espectador.</p>
+
+            <p class="text-custom-justify">En JuanFlix, cada reseña cuenta. Cada crítica, comentario o experiencia
+              personal añade una nueva capa a
+              este proyecto que se construye día a día con tu participación.</p>
+
+
+
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients section">
+
+      <div class="container">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 40
+                },
+                "480": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 60
+                },
+                "640": {
+                  "slidesPerView": 4,
+                  "spaceBetween": 80
+                },
+                "992": {
+                  "slidesPerView": 6,
+                  "spaceBetween": 120
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="https://cloudfront-us-east-1.images.arcpublishing.com/semana/PKXXSP6C4VGBLBXZUOFBSR42QA.png" class="img-fluid" alt=""></div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Clients Section -->
+
+    <!-- Featured Services Section -->
+    <section id="featured-services" class="featured-services section">
+
+      <!-- Section Title -->
+      <div class="container section-title">
+        <h2>Noticias Recientes</h2>
+        <p>Mantente al día con lo más nuevo del mundo del cine: estrenos, anuncios, entrevistas y novedades que no te
+          puedes perder.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="card">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnn_gYPfr23ReUHsi08pNDMN7pBU4YKj-vhA&s" alt="" class="img-fluid">
+              <div class="card-body">
+                <h3>
+                  <p style="color: white;">Nuevo tráiler impacta a los fans</p>
+                </h3>
+                <div class="card-content">
+                  <p>El avance de la próxima superproducción ha generado gran expectativa en redes. Mira por qué todos
+                    están hablando de él...<a href="blog.html">Ver Mas</a></p>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6">
+            <div class="card">
+              <img src="assets/img/jamescameron.jfif" alt="" class="img-fluid">
+              <div class="card-body">
+                <h3>
+                  <p style="color: white;">Entrevista exclusiva con un director en ascenso</p>
+                </h3>
+                <div class="card-content">
+                  <p>Hablamos con uno de los directores más prometedores del momento sobre su proceso creativo y sus
+                    próximos proyectos...<a href="blog.html">Ver Mas</a></p>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6">
+            <div class="card">
+              <img src="assets/img/spiderman.jfif" alt="" class="img-fluid">
+              <div class="card-body">
+                <h3>
+                  <p style="color: white;">Filtraciones revelan detalles inesperados</p>
+                </h3>
+                <div class="card-content">
+                  <p>Nuevos rumores y filtraciones han salido a la luz, dando pistas sobre lo que podría ser el próximo
+                    éxito en taquilla...<a href="blog.html">Ver Mas</a></p>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Card Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Featured Services Section -->
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section dark-background">
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col-xl-9 text-center text-xl-start">
+            <h3>Únete a JUANFLIX</h3>
+            <p>Accede a reseñas exclusivas, noticias del mundo del cine y mantente al día con los próximos estrenos.
+              Crea tu cuenta gratis y disfruta una experiencia pensada para verdaderos amantes del cine.</p>
+          </div>
+          <div class="col-xl-3 cta-btn-container text-center">
+            <a class="cta-btn align-middle" href="registro.html">Regístrate ahora</a>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Call To Action Section -->
+
+    <!-- Services Section -->
+    <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title">
+        <h2>¿Qué Ofrecemos?</h2>
+        <p>En la Plataforma JUANFLIX Ofrecemos Multiples Servicios Completamente Gratis Como:</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6 ">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-newspaper"></i></div>
+              <div>
+                <h4 class="title">Noticias del Cine</h4>
+                <p class="description">Entérate de lo último en el mundo del cine: nuevos trailers, castings
+                  confirmados, rumores, rodajes y eventos importantes.</p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-lg-6 ">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
+              <div>
+                <h4 class="title">Recomendaciones</h4>
+                <p class="description">Explora listas de películas por género, plataforma o estado de ánimo. Encuentra
+                  tu próxima favorita de manera sencilla y rápida.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-6 ">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
+              <div>
+                <h4 class="title">Próximos Estrenos</h4>
+                <p class="description">Mantente al día con las películas que están por llegar a cines y plataformas de
+                  streaming. No te pierdas ningún lanzamiento importante.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-6 ">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-film"></i></div>
+              <div>
+                <h4 class="title">Clásicos Imperdibles</h4>
+                <p class="description">Explora análisis y curiosidades sobre las películas más influyentes de la
+                  historia del cine. Ideal para quienes quieren ampliar su cultura cinematográfica.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-6 ">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
+              <div>
+                <h4 class="title">Tendencias y Top del Momento</h4>
+                <p class="description">Descubre qué películas están siendo más vistas, más comentadas y más destacadas
+                  en redes y plataformas de streaming.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-6 ">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-camera-reels"></i></div>
+              <div>
+                <h4 class="title">Especiales y Detrás de Cámaras</h4>
+                <p class="description">Contenido exclusivo con datos interesantes, making-of, entrevistas y todo lo que
+                  ocurre detrás de la producción de tus películas favoritas.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Services Section -->
+
+
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section dark-background">
+
+      <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
+
+      <div class="container">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                <h3>Saul Goodman</h3>
+                <h4>Cineasta Aficionado</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Antes de ver cualquier cosa, entro a JUANFLIX. La combinación de reseñas de expertos y de la
+                    comunidad me da la mejor perspectiva. Es mi sitio de referencia para decidir qué ver en la noche. La
+                    navegación es simple y las noticias son siempre las más frescas.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                <h3>Sara Wilsson</h3>
+                <h4>Crítica Comunitaria</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Lo que más me gusta es la posibilidad de escribir mis propias reseñas. Me siento parte de una
+                    comunidad. El proceso de envío es muy fácil y ver mis opiniones publicadas es genial. ¡Es el lugar
+                    perfecto para un cinéfilo!</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                <h3>Jena Karlis</h3>
+                <h4>Diseñadora y Usuario Activa</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>La página es rápida y el diseño es muy limpio. Es fácil encontrar tanto los estrenos como esos
+                    clásicos escondidos. Definitivamente la mejor plataforma gratuita de reseñas que he usado.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                <h3>Matt Brandon</h3>
+                <h4>Usuario Ocasional</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Simplemente genial. Las reseñas son honestas y van directo al punto, sin spoilers innecesarios.
+                    Las recomendaciones personalizadas siempre aciertan. Ahorra mucho tiempo buscando algo bueno para
+                    ver.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                <h3>John Larson</h3>
+                <h4>Amante del Cine Independiente</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Me encanta que JUANFLIX no solo se centre en lo más popular, sino que siempre encuentro noticias
+                    y reseñas de cine independiente y series internacionales. Además, la web se ve y funciona
+                    perfectamente en mi móvil. Puedo chequear una calificación mientras decido qué ver en cualquier
+                    plataforma. ¡Muy bien optimizada!</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- /Testimonials Section -->
+
+
+    <!-- Faq Section -->
+    <section id="faq" class="faq section">
+
+      <!-- Section Title -->
+      <div class="container section-title">
+        <h2>Preguntas Frecuentes de JUANFLIX</h2>
+        <p>Aqui Respondemos Sus Dudas:</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-6">
+
+            <div class="faq-container">
+
+              <div class="faq-item faq-active">
+                <h3>¿Qué es JUANFLIX?</h3>
+                <div class="faq-content">
+                  <p>JUANFLIX es una plataforma gratuita dedicada a ofrecer reseñas, noticias y recomendaciones sobre
+                    películas, series, documentales y más. Nuestro contenido se nutre de nuestro equipo y de las
+                    contribuciones de la comunidad.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>¿El contenido y las recomendaciones tienen algún costo?</h3>
+                <div class="faq-content">
+                  <p>¡No! Todo el acceso a reseñas, noticias y recomendaciones en JUANFLIX es completamente gratuito.
+                  </p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>¿Cualquier usuario puede escribir una reseña?</h3>
+                <div class="faq-content">
+                  <p>Sí, la plataforma permite a los usuarios registrados enviar sus propias reseñas y opiniones sobre
+                    el contenido. Solo tienes que crear una cuenta gratuita.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+            </div>
+
+          </div><!-- End Faq Column-->
+
+          <div class="col-lg-6">
+
+            <div class="faq-container">
+
+              <div class="faq-item">
+                <h3>¿Necesito una cuenta para leer las reseñas?</h3>
+                <div class="faq-content">
+                  <p>Si, Necesitas Registrarte para Leer y Escribir Reseñas.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>¿Cómo reporto una reseña o comentario inapropiado?</h3>
+                <div class="faq-content">
+                  <p>En cada reseña o comentario verás una opción para "Reportar". Haz clic en ella y un moderador
+                    revisará el contenido lo antes posible.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>¿Mis reseñas son revisadas antes de ser publicadas?</h3>
+                <div class="faq-content">
+                  <p>Sí, todas las reseñas de los usuarios pasan por un proceso de moderación para asegurar que cumplen
+                    con nuestras políticas de contenido (respeto, no spam, etc.) antes de ser publicadas en la web.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+            </div>
+
+          </div><!-- End Faq Column-->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Faq Section -->
+
+    <!-- Team Section -->
+    <section id="team" class="team section">
+      <!-- Section Title -->
+      <div class="container section-title">
+        <h2>Equipo</h2>
+        <p>Nuestro equipo de Programadores, Blogueros, Diseñadores y Cineastas:</p>
+      </div><!-- End Section Title -->
+      <div class="site-section slider-team-wrap">
+        <div class="container">
+
+          <div class="slider-nav d-flex justify-content-end mb-3">
+            <a href="#" class="js-prev js-custom-prev"><i class="bi bi-arrow-left-short"></i></a>
+            <a href="#" class="js-next js-custom-next"><i class="bi bi-arrow-right-short"></i></a>
+          </div>
+
+          <div class="swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+              {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                  "delay": 5000
+                },
+                "slidesPerView": "1",
+                "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
+                },
+                "navigation": {
+                  "nextEl": ".js-custom-next",
+                  "prevEl": ".js-custom-prev"
+                },
+                "breakpoints": {
+                  "640": {
+                    "slidesPerView": 2,
+                    "spaceBetween": 30
+                  },
+                  "768": {
+                    "slidesPerView": 3,
+                    "spaceBetween": 30
+                  },
+                  "1200": {
+                    "slidesPerView": 3,
+                    "spaceBetween": 30
+                  }
+                }
+              }
+            </script>
+            <div class="swiper-wrapper text-center">
+              <div class="swiper-slide">
+                <div class="team">
+                  <div class="pic">
+                    <img src="https://cdn.id.supercell.com/assets/web/portraits/0,chicken,FF6100,EDD566.png" alt="Image"
+                      class="img-fluid">
+                  </div>
+                  <h3 clas="">
+                    <span class="">Juan</span> Angel
+                  </h3>
+                  <span class="d-block position">Programador y Arquitecto Web</span>
+                  <p>
+                    Apasionado por el código y el cine independiente, Juan es quien da vida a la plataforma desde
+                    adentro. Se encarga de que JuanFlix funcione rápido, seguro y sin errores, creando herramientas que
+                    permiten a los usuarios escribir, compartir y descubrir reseñas con total comodidad.
+                  </p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="team">
+                  <div class="pic">
+                    <img src="https://cdn.id.supercell.com/assets/web/portraits/0,chicken,E9E9E9,E9E9E9.png" alt="Image"
+                      class="img-fluid">
+                  </div>
+                  <h3 clas="">
+                    <span class="">Juan </span> Angel
+                  </h3>
+                  <span class="d-block position">Bloguero y Diseñador.</span>
+                  <p>
+                    Creativo por naturaleza, Juan combina la estética visual con la narrativa para dar personalidad a
+                    JuanFlix. Escribe artículos sobre estrenos, tendencias y curiosidades del mundo del cine, al mismo
+                    tiempo que diseña elementos visuales que hacen que la plataforma luzca moderna y atractiva. Su toque
+                    artístico está en cada rincón del sitio.
+                  </p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="team">
+                  <div class="pic">
+                    <img src="https://cdn.id.supercell.com/assets/web/portraits/0,chicken,FF6100,EDD566.png" alt="Image"
+                      class="img-fluid">
+                  </div>
+                  <h3 clas="">
+                    <span class="">Juan</span> Angel
+                  </h3>
+                  <span class="d-block position">Editor de Contenido y Cinéfilo</span>
+                  <p>
+                    Experto en storytelling, Juan revisa y organiza las reseñas, mantiene la calidad del contenido y
+                    promueve la interacción entre los usuarios. Ama el cine clásico y disfruta recomendar joyas ocultas
+                    que merecen más reconocimiento. Su misión es construir una comunidad donde cada opinión cuente.
+                  </p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="team">
+                  <div class="pic">
+                    <img src="https://cdn.id.supercell.com/assets/web/portraits/0,chicken,E9E9E9,E9E9E9.png" alt="Image"
+                      class="img-fluid">
+                  </div>
+                  <h3 clas="">
+                    <span class="">Juan</span> Angel
+                  </h3>
+                  <span class="d-block position">Community Manager y Productor Digital</span>
+                  <p>
+                    Juan es la voz de JuanFlix hacia el mundo. Gestiona redes, responde a los usuarios, desarrolla
+                    campañas y se asegura de que todos se enteren de las últimas novedades. Con su estilo cercano y
+                    dinámico, transforma la plataforma en un espacio vivo, lleno de conversaciones y pasión por el
+                    séptimo arte.
+                  </p>
+                </div>
+              </div>
+              <!-- <div class="swiper-slide"></div> -->
+            </div>
+          </div>
+        </div>
+        <!-- /.container -->
+      </div>
+    </section><!-- /Team Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title">
+        <h2>Contacto</h2>
+        <p>¿Tienes una duda, sugerencia o propuesta? Envíanos un mensaje y te responderemos lo antes posible.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="info-item d-flex">
+              <i class="bi bi-geo-alt flex-shrink-0"></i>
+              <div>
+                <h3>Direccion</h3>
+                <p>Cra 15 # 123-45, Barrio La Esmeralda, Bogotá D.C.</p>
+              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex">
+              <i class="bi bi-telephone flex-shrink-0"></i>
+              <div>
+                <h3>Telefono</h3>
+                <p>+1 5589 55488 55</p>
+              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex">
+              <i class="bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h3>Correo Electronico</h3>
+                <p>juanflix@gmail.com</p>
+              </div>
+            </div><!-- End Info Item -->
+
+          </div>
+
+          <div class="col-lg-8">
+            <form class="php-email-form" id="newsletterForm2">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Tu Nombre" required="">
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Tu Email" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Asunto" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Mensaje" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Enviar Mensaje</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-6">
+            <h4>Suscríbete a nuestro Newsletter</h4>
+            <p>¡Suscríbase a nuestro newsletter y recibe las últimas noticias sobre Peliculas y Series</p>
+            <form action="forms/newsletter.php" method="post" class="php-email-form" id="newsletterForm">
+              <div class="newsletter-form"><input type="email" name="email" required=""><input type="submit"
+                  value="Subscribete" required=""></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="d-flex align-items-center">
+            <span class="sitename">JUANFLIX</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Cra 15 # 123-45, Barrio La Esmeralda, Bogotá D.C..</p>
+            <p class="mt-3"><strong>Telefono:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Correo:</strong> <span>juanflix@gmail.com</span></p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Enlaces útiles</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Inicio</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#about">Sobre Nosotros</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#services">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+          <h4>Síganos</h4>
+          <p>En Nuestras Redes Sociales:</p>
+          <div class="social-links d-flex">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">JUANFLIX</strong> <span>Todos los Derechos
+          Reservados</span></p>
+      <div class="credits">
+        Diseñado por: <a href="https://youtube.com/@juanchodev22?si=xacwpnl6mD9cAmr_" target="_blank"> Juan Angel
+          Giraldo Gomez</a>
+      </div>
+    </div>
+
+
+    <!-- Popup del Newsletter-->
+    <div class="modal fade" id="suscritoModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-4 text-center bg-dark">
+          <h4 class="mb-3 text-white fw-bold">¡Suscripción Exitosa!</h4>
+          <p class="text-white fw-bold">Gracias por suscribirte al Newsletter.</p>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup del form-->
+    <div class="modal fade" id="suscritoModal2" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-4 text-center bg-dark">
+          <h4 class="mb-3 text-white fw-bold">¡Envio Exitoso!</h4>
+          <p class="text-white fw-bold">Leeremos Tu Mensaje en unos Momentos.</p>
+          <button type="button" class="btn btn-success " data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <script>
+    document.getElementById("newsletterForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      new bootstrap.Modal(document.getElementById('suscritoModal')).show();
+      this.reset();
+    });
+  </script>
+
+  <script>
+    document.getElementById("newsletterForm2").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      new bootstrap.Modal(document.getElementById('suscritoModal2')).show();
+      this.reset();
+    });
+  </script>
+
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

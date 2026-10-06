@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>JUANFLIX - Perfil de Usuario</title>
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Montserrat:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    /* --- VARIABLES Y BASE --- */
+    :root {
+      --juanflix-bg: #141414;
+      /* Fondo oscuro estilo Netflix */
+      --juanflix-card: #1f1f1f;
+      --juanflix-green: #46d369;
+      /* Verde brillante del concept art */
+      --juanflix-green-hover: #26ab52;
+      --text-main: #ffffff;
+      --text-muted: #b3b3b3;
+    }
+
+    body {
+      background-color: var(--juanflix-bg);
+      color: var(--text-main);
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      color: var(--juanflix-green);
+    }
+
+    /* --- NAVBAR --- */
+    .navbar {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+      padding: 15px 4%;
+      transition: background-color 0.4s;
+    }
+
+    .navbar.scrolled {
+      background-color: #0b0b0b;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      color: white !important;
+    }
+
+    .nav-link {
+      color: #e5e5e5 !important;
+      font-weight: 500;
+      margin-right: 15px;
+      font-size: 0.95rem;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: white !important;
+      font-weight: 700;
+    }
+
+    .nav-icons i {
+      font-size: 1.3rem;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .user-avatar-nav {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      margin-left: 20px;
+    }
+
+    /* --- SECCIÓN DE PERFIL DE USUARIO (NUEVO) --- */
+    .profile-hero {
+      position: relative;
+      background-color: var(--juanflix-card);
+      padding: 50px 4%;
+      margin-top: 60px;
+      /* Espacio para el navbar fijo */
+      border-bottom: 2px solid #292929;
+    }
+
+    .profile-avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--juanflix-green);
+      box-shadow: 0 0 20px rgba(70, 211, 105, 0.5);
+      /* Sombra verde */
+    }
+
+    .profile-name {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-top: 15px;
+      color: var(--text-main);
+    }
+
+    .profile-tag {
+      color: var(--juanflix-green);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .profile-stats .stat-item {
+      display: inline-block;
+      margin-right: 25px;
+      text-align: center;
+    }
+
+    .profile-stats .stat-number {
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .profile-stats .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-tabs-juanflix {
+      border-bottom: 2px solid #292929;
+      margin-bottom: 20px;
+    }
+
+    .nav-tabs-juanflix .nav-link {
+      border: none;
+      color: var(--text-muted) !important;
+      background-color: transparent !important;
+      margin-right: 10px;
+      padding: 10px 15px;
+      border-radius: 0;
+      border-bottom: 3px solid transparent;
+      font-weight: 600;
+    }
+
+    .nav-tabs-juanflix .nav-link.active,
+    .nav-tabs-juanflix .nav-link:hover {
+      color: var(--juanflix-green) !important;
+      border-bottom: 3px solid var(--juanflix-green);
+    }
+
+    /* --- SECCIONES REUTILIZADAS --- */
+    .content-section {
+      padding: 20px 4%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      margin-top: 40px;
+    }
+
+    /* CARD DESIGN */
+    .movie-card {
+      background: transparent;
+      border: none;
+      position: relative;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.05);
+      z-index: 10;
+    }
+
+    .poster-container {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      aspect-ratio: 2/3;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .poster-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Overlay oscuro en la parte inferior del poster */
+    .poster-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      padding: 20px 10px 10px 10px;
+    }
+
+    .movie-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 0;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .movie-card-profile {
+      margin-bottom: 20px;
+    }
+
+    /* USER REVIEWER INFO (Debajo del poster) - Reutilizado para Críticas del Usuario */
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 0 5px;
+    }
+
+    .reviewer-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+      border: 1px solid #444;
+    }
+
+    .reviewer-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reviewer-name {
+      font-size: 0.75rem;
+      color: #b3b3b3;
+    }
+
+    .reviewer-stars {
+      color: var(--juanflix-green);
+      font-size: 0.7rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="header" class="fixed-top">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">JUANFLIX</a>
+
+        <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+            <li class="nav-item"><a class="nav-link" href="plataforma.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="movie.html">Películas</a></li>
+            <li class="nav-item"><a class="nav-link" href="serie.html">Series</a></li>
+            <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="explorar.html">Explorar</a></li>
+          </ul>
+
+          <div class="d-flex align-items-center nav-icons">
+           <a href="explorar.html"><i class="bi bi-search"></i></a> 
+            <div class="dropdown">
+              <a href="#" role="button" data-bs-toggle="dropdown">
+                <img src="https://cdn.id.supercell.com/assets/web/portraits/0,chicken,FF6100,EDD566.png" alt="Perfil"
+                  class="user-avatar-nav">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end mt-3">
+                </li>
+                <li><a class="dropdown-item" href="index.html">Cerrar Sesión</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="profile-hero">
+      <div class="container-fluid d-flex flex-column flex-md-row align-items-center align-items-md-start">
+
+        <div class="me-md-5 mb-4 mb-md-0 text-center">
+          <img src="https://cdn.id.supercell.com/assets/web/portraits/0,chicken,FF6100,EDD566.png"
+            alt="Avatar de Juan Perez" class="profile-avatar">
+        </div>
+
+        <div class="text-center text-md-start">
+          <span class="profile-tag">Administrador y Dueño</span>
+          <h1 class="profile-name">Juan Angel</h1>
+          <p class="text mb-4">
+            Amante del cine de acción y la ciencia ficción. <br>
+            "Lo Bueno Toma Tiempo - Juan Angel 2025."
+          </p>
+
+          <div class="profile-stats">
+            <div class="stat-item">
+              <div class="stat-number text-white">45</div>
+              <div class="stat-label">Críticas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number text-white">4.7K</div>
+              <div class="stat-label">Vistas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number text-white">1.2K</div>
+              <div class="stat-label">Seguidores</div>
+            </div>
+          </div>
+
+          <a href="#" class="btn btn-outline-success mt-3 mt-md-4">
+            <i class="bi bi-person-plus-fill me-2"></i> Seguir
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section pt-4">
+      <div class="container-fluid">
+
+        <ul class="nav nav-tabs nav-tabs-juanflix" id="profileTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-pane"
+              type="button" role="tab">
+              <i class="bi bi-file-text me-2"></i> Críticas Publicadas
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="watched-tab" data-bs-toggle="tab" data-bs-target="#watched-pane" type="button"
+              role="tab">
+              <i class="bi bi-camera-reels me-2"></i> Películas y Series Vistas
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="watchlist-tab" data-bs-toggle="tab" data-bs-target="#watchlist-pane"
+              type="button" role="tab">
+              <i class="bi bi-bookmark-fill me-2"></i> Lista de Pendientes
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="profileTabsContent">
+
+          <div class="tab-pane fade show active" id="reviews-pane" role="tabpanel" tabindex="0">
+            <h4 class="text-white mb-4">Últimas 7 Críticas</h4>
+            <div class="row">
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img src="https://pics.filmaffinity.com/El_padrino-590289523-large.jpg" class="poster-img"
+                      alt="El Padrino">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">El Padrino</h5>
+                    </div>
+                  </div>
+                  <div class="reviewer-info">
+                    <div class="reviewer-details">
+                      <span class="reviewer-name">Nota de Juan: "Mas o Menos"</span>
+                      <div class="reviewer-stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i
+                          class="bi bi-star"></i><i class="bi bi-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img
+                      src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg"
+                      class="poster-img" alt="Inception">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Inception</h5>
+                    </div>
+                  </div>
+                  <div class="reviewer-info">
+                    <div class="reviewer-details">
+                      <span class="reviewer-name">Nota de Juan: "Un viaje mental."</span>
+                      <div class="reviewer-stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                          class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7NbN-2189lvDeQ-_Igh-fVTHBkOBBmhkTbg&s"
+                      class="poster-img" alt="Gladiator">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Gladiator</h5>
+                    </div>
+                  </div>
+                  <div class="reviewer-info">
+                    <div class="reviewer-details">
+                      <span class="reviewer-name">Nota de Juan: "Épica pura."</span>
+                      <div class="reviewer-stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                          class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu963mN4JciETrOF9CHYgHKSxx4-51bAuCiA&s"
+                      class="poster-img" alt="Gladiator">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Megamente 2</h5>
+                    </div>
+                  </div>
+                  <div class="reviewer-info">
+                    <div class="reviewer-details">
+                      <span class="reviewer-name">Nota de Juan: "Perdi mi Tiempo Viendo esta Basura."</span>
+                      <div class="reviewer-stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i
+                          class="bi bi-star"></i><i class="bi bi-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/e/e7/Jurassic_Park_poster.jpg"
+                      class="poster-img" alt="Jurassic Park">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Parque Jurásico</h5>
+                    </div>
+                  </div>
+                  <div class="reviewer-info">
+                    <div class="reviewer-details">
+                      <span class="reviewer-name">Nota de Juan: "Clásico inigualable."</span>
+                      <div class="reviewer-stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                          class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img
+                      src="https://m.media-amazon.com/images/M/MV5BNjQ4NGU5ZWEtMjM1My00MTcxLWIzYWMtN2MwM2E2MWYzODk2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                      class="poster-img" alt="Titanic">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Titanic</h5>
+                    </div>
+                  </div>
+                  <div class="reviewer-info">
+                    <div class="reviewer-details">
+                      <span class="reviewer-name">Nota de Juan: "La más romántica."</span>
+                      <div class="reviewer-stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                          class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img src="https://pics.filmaffinity.com/Matrix-430409153-large.jpg" class="poster-img" alt="Matrix">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Matrix</h5>
+                    </div>
+                  </div>
+                  <div class="reviewer-info">
+                    <div class="reviewer-details">
+                      <span class="reviewer-name">Nota de Juan: "Revolución cyberpunk."</span>
+                      <div class="reviewer-stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                          class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="watched-pane" role="tabpanel" tabindex="0">
+            <h4 class="text-white mb-4">Películas y Series Marcadas como Vistas</h4>
+            <p class="text">Estas son las películas que Juan ha marcado como vistas.</p>
+            <div class="row">
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img src="https://images.justwatch.com/poster/167978449/s718/forrest-gump.jpg" class="poster-img"
+                      alt="Forrest Gump">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Forrest Gump</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img
+                      src="https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p10998_p_v13_au.jpg"
+                      class="poster-img" alt="E.T.">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">E.T.</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu963mN4JciETrOF9CHYgHKSxx4-51bAuCiA&s"
+                      class="poster-img" alt="Gladiator">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Megamente 2</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="movie-card movie-card-profile">
+                        <div class="poster-container">
+                            <img src="https://m.media-amazon.com/images/M/MV5BNTdmZjEyMzktNGMzNS00ZWMyLTljNGMtOTA1ZTNlMzkwZDk0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                class="poster-img" alt="Movie">
+                            <div class="poster-overlay">
+                                <h5 class="movie-title">Escobar, el Patrón del Mal (2012)</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                 <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="movie-card">
+                        <div class="poster-container">
+                            <img src="https://es.web.img2.acsta.net/pictures/21/05/12/16/27/2587198.jpg"
+                                class="poster-img" alt="Movie">
+                            <div class="poster-overlay">
+                                <h5 class="movie-title">Loki</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+             
+
+
+
+
+
+          </div>
+
+
+
+
+
+
+          <div class="tab-pane fade" id="watchlist-pane" role="tabpanel" tabindex="0">
+            <h4 class="text-white mb-4">Películas por Ver</h4>
+            <p class="text">Estas son las películas y Series que Juan tiene en su lista para ver pronto.</p>
+            <div class="row">
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img
+                      src="https://archivos-cms.cinecolombia.com/images/_aliases/poster_card/2/0/8/4/94802-3-esl-CO/1e013cce6421-poster480_670.jpg"
+                      class="poster-img" alt="Avatar 3">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Avatar: Fire and Ash</h5>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card movie-card-profile">
+                  <div class="poster-container">
+                    <img
+                      src="https://archivos-cms.cinecolombia.com/images/_aliases/exhibition_poster/0/5/0/5/95050-1-esl-CO/4b039bd27b6c-poster-480-x-670.png"
+                      class="poster-img" alt="el paseo 2">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">El Paseo 8, La Luna De Hiel</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                <div class="movie-card">
+                  <div class="poster-container">
+                    <img
+                      src="https://m.media-amazon.com/images/M/MV5BNzEzYjhkYTctMWNmZS00MTc5LWI4OWUtZjFkNzNkYTNkMTJlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                      class="poster-img" alt="Movie">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Demon Slayer: El Tren Infinito</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="movie-card">
+                  <div class="poster-container">
+                    <img
+                      src="https://m.media-amazon.com/images/M/MV5BZGZkNThlYjYtOGI0MS00NGY2LTgwZTAtZWYwZTFlNTcxZDFhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                      class="poster-img" alt="Movie">
+                    <div class="poster-overlay">
+                      <h5 class="movie-title">Vision Quest</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Efecto de Navbar: Transparente al inicio, negra al hacer scroll
+    const nav = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  </script>
+
+</body>
+
+</html>

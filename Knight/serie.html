@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>JUANFLIX - Plataforma de Reseñas</title>
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Montserrat:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES Y BASE --- */
+        :root {
+            --juanflix-bg: #141414;
+            --juanflix-card: #1f1f1f;
+            --juanflix-green: #46d369;
+            --juanflix-green-hover: #26ab52;
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+        }
+
+        body {
+            background-color: var(--juanflix-bg);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: var(--juanflix-green);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+            padding: 15px 4%;
+            transition: background-color 0.4s;
+        }
+
+        .navbar.scrolled {
+            background-color: #0b0b0b;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            color: white !important;
+        }
+
+        .nav-link {
+            color: #e5e5e5 !important;
+            font-weight: 500;
+            margin-right: 15px;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: white !important;
+            font-weight: 700;
+        }
+
+        .nav-icons i {
+            font-size: 1.3rem;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .user-avatar-nav {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            margin-left: 20px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-movie {
+            position: relative;
+            height: 85vh;
+            width: 100%;
+            background: url('https://i0.wp.com/es.hollywoodreporter.com/wp-content/uploads/2025/10/Esto-es-todo-lo-que-sabemos-sobre-la-ultima-temporada-de-Stranger-Things.jpg?fit=1280%2C770&ssl=1') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to right, #141414 10%, rgba(20, 20, 20, 0.6) 50%, rgba(20, 20, 20, 0.2) 100%),
+                linear-gradient(to top, #141414 0%, transparent 20%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding-left: 4%;
+            max-width: 600px;
+        }
+
+        .hero-tag {
+            color: var(--juanflix-green);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-rating {
+            color: var(--juanflix-green);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .hero-rating span {
+            color: #fff;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            opacity: 0.8;
+        }
+
+        .btn-juanflix {
+            background-color: var(--juanflix-green);
+            color: black;
+            font-weight: 700;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+
+        .btn-juanflix:hover {
+            background-color: var(--juanflix-green-hover);
+            color: white;
+        }
+
+        /* --- GRID --- */
+        .content-section {
+            padding: 20px 4%;
+            position: relative;
+            z-index: 2;
+            margin-top: -50px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            margin-top: 40px;
+        }
+
+        /* CARD DESIGN */
+        .movie-card {
+            background: transparent;
+            border: none;
+            position: relative;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .poster-container {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            aspect-ratio: 2/3;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .poster-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .poster-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 20px 10px 10px 10px;
+        }
+
+        .movie-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        /* USER REVIEWER INFO */
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            padding: 0 5px;
+        }
+
+        .reviewer-avatar {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 1px solid #444;
+        }
+
+        .reviewer-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .reviewer-name {
+            font-size: 0.75rem;
+            color: #b3b3b3;
+        }
+
+        .reviewer-stars {
+            color: var(--juanflix-green);
+            font-size: 0.7rem;
+        }
+
+        .text-custom-color {
+            color: var(--juanflix-green);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="fixed-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">JUANFLIX</a>
+
+                <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+                        <li class="nav-item"><a class="nav-link" href="plataforma.html">Inicio</a></li>
+                        <li class="nav-item "><a class="nav-link" href="movie.html">Películas</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="serie.html">Series</a></li>
+                        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="explorar.html">Explorar</a></li>
+                    </ul>
+
+                    <div class="d-flex align-items-center nav-icons">
+                        <a href="explorar.html"><i class="bi bi-search"></i></a>
+                        <div class="dropdown">
+                            <a href="#" role="button" data-bs-toggle="dropdown">
+                                <img src="https://cdn.id.supercell.com/assets/web/portraits/0,chicken,FF6100,EDD566.png"
+                                    alt="Perfil" class="user-avatar-nav">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end mt-3">
+                                <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="index.html">Cerrar Sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero-movie">
+            <div class="hero-overlay"></div>
+            <div class="hero-content container-fluid">
+                <span class="hero-tag">Crítica Destacada:</span>
+                <h1 class="hero-title">STRANGER THINGS: Temporada 5</h1>
+
+                <div class="hero-rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <span>(2.8/5) por Mateo Cruz</span>
+                </div>
+
+                <p class="mb-4 text-light" style="max-width: 500px; font-weight: 300;">
+                    "YA DEJEN MORIR A LA SERIE."
+                </p>
+
+                <a href="explorar.html" class="btn btn-juanflix">
+                    <i class="bi bi-file-text me-2"></i> Leer Crítica
+                </a>
+
+              <!-- BOTÓN QUE ACTIVA EL MODAL -->
+                <button type="button" class="btn btn-outline-light ms-2 px-4" id="newsletterForm" data-bs-toggle="modal"
+                    data-bs-target="#suscritoModal">
+                    <i class="bi bi-plus-lg"></i> Mi Lista
+                </button>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Series Recien añadidas</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BYTY4YTVkY2QtMjRmOS00YzliLWIxOWQtMTdkOTVkN2UzODNmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Succession</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMGRjZDBjODMtMWQ1Zi00MWRkLTk5YTMtMDU1NTNkMzhkM2QwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Black Mirror</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnb_D6lfcgorFzKgDZpz1BhP4bUq4nurUy1w&s"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Game of Thrones</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZmI3YWVhM2UtNDZjMC00YTIzLWI2NGUtZWIxODZkZjVmYTg1XkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Ted Lasso</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://pics.filmaffinity.com/stranger_things-875025085-large.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Stranger Things</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BOGIyNGRiNzgtOWQxZC00YzJmLThlZTYtYTMyMDk0YWZjMTk5XkEyXkFqcGc@._V1_QL75_UX190_CR0,0,190,281_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Alien: Earth</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="content-section">
+            <h3 class="section-title">Últimas Críticas de la Comunidad</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://resizing.flixster.com/aX9Yz5sNV2WpBA5CoENzIl9RbTM=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vUlRUVjI2NTU1OS53ZWJw"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Crown</h5></div>
+                            </div>
+                            <div class="reviewer-info">
+                                <img src="https://i.pravatar.cc/150?img=33" class="reviewer-avatar" alt="User">
+                                <div class="reviewer-details">
+                                    <span class="reviewer-name">Marta Gonzalez</span>
+                                    <div class="reviewer-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMzU5ZGYzNmQtMTdhYy00OGRiLTg0NmQtYjVjNzliZTg1ZGE4XkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg" class="poster-img"
+                                    alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Breaking Bad</h5></div>
+                            </div>
+                            <div class="reviewer-info">
+                                <img src="https://i.pravatar.cc/150?img=47" class="reviewer-avatar" alt="User">
+                                <div class="reviewer-details">
+                                    <span class="reviewer-name">Ted News</span>
+                                    <div class="reviewer-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTg1MDFhY2ItNjdlMi00N2RhLThjMTQtNDQ3M2JjNDRiMTlhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Jurassic World: Campamento Cretácico</h5></div>
+                            </div>
+                            <div class="reviewer-info">
+                                <img src="https://i.pravatar.cc/150?img=5" class="reviewer-avatar" alt="User">
+                                <div class="reviewer-details">
+                                    <span class="reviewer-name">Nico R.</span>
+                                    <div class="reviewer-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/5/58/TheOffice_S7_DVD.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Office</h5></div>
+                            </div>
+                            <div class="reviewer-info">
+                                <img src="https://i.pravatar.cc/150?img=11" class="reviewer-avatar" alt="User">
+                                <div class="reviewer-details">
+                                    <span class="reviewer-name">Santi O.</span>
+                                    <div class="reviewer-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZDI5YzJhODQtMzQyNy00YWNmLWIxMjUtNDBjNjA5YWRjMzExXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Severance</h5></div>
+                            </div>
+                            <div class="reviewer-info">
+                                <img src="https://i.pravatar.cc/150?img=68" class="reviewer-avatar" alt="User">
+                                <div class="reviewer-details">
+                                    <span class="reviewer-name">Aaron G.</span>
+                                    <div class="reviewer-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img2.acsta.net/pictures/19/11/22/09/33/5060052.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Witcher</h5></div>
+                            </div>
+                            <div class="reviewer-info">
+                                <img src="https://i.pravatar.cc/150?img=60" class="reviewer-avatar" alt="User">
+                                <div class="reviewer-details">
+                                    <span class="reviewer-name">Laura T.</span>
+                                    <div class="reviewer-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Recomendaciones Hechas Para Ti:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BYzJhY2YzYmMtNDgwZi00ZjEyLTk2ODAtZDE1YzU3MTRjNTYzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Monsters at Work</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://pics.filmaffinity.com/sherlock-635342236-large.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Sherlock</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://images.justwatch.com/poster/304409221/s718/superman-y-lois.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Superman y Lois</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img3.acsta.net/pictures/14/02/25/13/48/354317.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Community</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNGYxNzgzNTQtY2U0OC00NzU2LTgxZmYtNmZkMmVlMjgyMzM3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Jack Ryan</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZDI0Zjk2NjMtOGRhMy00YzkyLWIwMzgtYmNiZDczM2IzOTAzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">La Casa de Papel</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Las Mejores Series de Accion:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIfcFcNLClcwsPKn92fLnrpnnGqurbygVpAuugIVUfJNY7HzmMK9JW1xGeqW8bSUYezd9GOq8CIdYINNzo60AS4o1vfh-rL3dYfS2XtZg&s=10"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Mandalorian</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BOGM0NGY3ZmItOGE2ZC00OWIxLTk0N2EtZWY4Yzg3ZDlhNGI3XkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Peaky Blinders</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://images.justwatch.com/poster/331747916/s332/temporada-1"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Vikingos</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNWJkMGJlNjEtOGE0MC00ZWE0LTkwMGQtM2ZhMjQ1ZWNlN2I0XkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">FUBAR</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMzJmOTAwNTAtZWM3NS00YWQwLWJmYzItN2UxOTlhNThiYTc3XkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Warrior</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BODU1MmNiNWEtODJjMy00ZTRlLWFkZTctYzViNjBhOTM1OGIxXkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Gangs of London</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Las Mejores Series de Suspenso:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZDk1ZTdjOWItNTJmYS00MGIzLThmY2ItZWNiOGY5MzJlNTA5XkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Ozark</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/1/12/The_Queen%27s_Gambit_%28miniseries%29.png"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Queen's Gambit</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BYjgwYzA1NWMtNDYyZi00ZGQyLWI5NTktMDYwZjE2OTIwZWEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">True Detective</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTRkNGZlMjUtZGVhZi00YjgzLTgwZmMtMGVlZTc4OGUzODk1XkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Sinner</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img3.acsta.net/pictures/19/08/07/17/01/2286697.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Mindhunter</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZDI5YzJhODQtMzQyNy00YWNmLWIxMjUtNDBjNjA5YWRjMzExXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Severance</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Series para Toda la Familia:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://www.penguinlibros.com/co/1703413/percy-jackson-y-los-dioses-del-olimpo-la-serie-completa.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Percy Jackson y los Dioses del Olimpo</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://pics.filmaffinity.com/modern_family-267543706-large.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Modern Family</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK2tpYqTPshF6ztKywddYtQaptC0zClJ6PjQ&s"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Avatar: La leyenda de Aang</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://pics.filmaffinity.com/lemony_snicket_s_a_series_of_unfortunate_events-182993793-large.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Una serie de eventos desafortunados</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://i.ebayimg.com/00/s/MTYwMFgxMDY2/z/r9YAAOSwK19ka3DI/$_57.JPG?set_id=8800005007"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Bluey</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTgzMzAyOTg4Ml5BMl5BanBnXkFtZTgwMjA0Mjk0OTE@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Good Place</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Series para Reir:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BOTU2YmM5ZjctOGVlMC00YTczLTljM2MtYjhlNGI5YWMyZjFkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Friends</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNzBiODQxZTUtNjc0MC00Yzc1LThmYTMtN2YwYTU3NjgxMmI4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Brooklyn Nine-Nine</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMmRjNjZjN2ItN2FkYi00ZDg0LWExN2EtMTU2ODUwNWU1M2NhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Seinfeld</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNDlhMzAwNTAtNTk2NS00MTdkLWE3ZWYtMDU0MTFiYmU2ZTc0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Parks and Recreation</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZmI3YWVhM2UtNDZjMC00YTIzLWI2NGUtZWIxODZkZjVmYTg1XkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Ted Lasso</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/5/58/TheOffice_S7_DVD.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Office</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Series de TERROR:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BOThhN2M3ZjctMGRiNi00NDIwLWI5NjktMGRmZTMxMzc5MDE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">La maldición de Hill House</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://pics.filmaffinity.com/midnight_mass-383808751-large.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Midnight Mass (Misa de Medianoche)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://pbs.twimg.com/media/FVy3f2RWIAELgSs.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">American Horror Story (Antología)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNTUxNzI1MzcwN15BMl5BanBnXkFtZTgwMjA1MTg5NDM@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Terror</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img3.acsta.net/pictures/16/09/07/15/33/585649.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Channel Zero</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img3.acsta.net/pictures/17/11/10/12/27/3064798.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Dark</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Series de Romance:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BYzc4NmIwNGMtNGIzNy00Nzg2LWFlNzItYzhmNjQ1NGUwNTg1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Bridgerton</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://images.justwatch.com/poster/34058043/s718/outlander.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Outlander</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://images.justwatch.com/poster/176978990/s718/normal-people.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Normal People</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTU4OTM5OTM2NV5BMl5BanBnXkFtZTgwNDc3MDg0MzI@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">You Are the Worst</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BN2QwMTgyZTAtOTM4MS00OGRhLWIzNjQtZmQ3Yzc5NmNiYzhlXkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Pachinko</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://images.justwatch.com/poster/250772645/s718/one-day-siempre-el-mismo-dia.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">One Day (Siempre el mismo día)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Series de Super Heroes:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMWJlN2U5MzItNjU4My00NTM2LWFjOWUtOWFiNjg3ZTMxZDY1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Boys</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZjE4ZDU4ZjMtZjliYS00M2ZmLThkNTItN2U3MmJjOGU0NmIxXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Invincible</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://lumiere-a.akamaihd.net/v1/images/image003_86eb2e3f.jpeg?region=0,0,607,867"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Daredevil</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img2.acsta.net/pictures/21/05/12/16/27/2587198.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Loki</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img3.acsta.net/pictures/19/02/12/11/56/4356169.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Doom Patrol</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMzlmMmIxODItYzBjNC00YjMwLWIwOTAtNzVlMTBlNTNkMjZjXkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">The Umbrella Academy</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+        <section class="content-section">
+            <h3 class="section-title">Telenovelas:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BYjhmNjYwNGEtYmNhZi00YzBmLThjNTMtOTAyNGJjNzc5YmJiXkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Yo soy Betty, la fea (Colombia)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://images.vix.com/prd/videos/video:mcp:4539154/c3f336e1c1f63fc9d67363b3e1393578"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">La Esclava Isaura (Brasil)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Los_ricos_tambi%C3%A9n_lloran_2022_series_poster.jpeg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Los Ricos También Lloran (México)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTIxYTVlYmMtZTViOC00YjI3LTg5YzEtNWMzMDQ3ZGUxY2FkXkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Kassandra (Venezuela)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNzVmMDAxOTYtYzQwMi00ZTZmLTgwY2UtNTQxN2UwY2NjMGQwXkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Fatmagül (Turquia)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img3.acsta.net/pictures/23/03/16/21/34/5374988.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">La Gloria (Corea del Sur)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Telenovelas Colombianas:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BYjhmNjYwNGEtYmNhZi00YzBmLThjNTMtOTAyNGJjNzc5YmJiXkEyXkFqcGc@._V1_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Yo soy Betty, la fea (1999)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img2.acsta.net/pictures/17/05/04/19/13/462204.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Café, con aroma de mujer (1994)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img3.acsta.net/pictures/14/07/30/13/44/020246.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Pasión de Gavilanes (2003)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMjE4NzAwODM3MV5BMl5BanBnXkFtZTcwMDM5MzkyMQ@@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Pedro el Escamoso (2001)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNTdmZjEyMzktNGMzNS00ZWMyLTljNGMtOTA1ZTNlMzkwZDk0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Escobar, el Patrón del Mal (2012)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://pics.filmaffinity.com/la_reina_del_flow-223343429-large.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">La Reina del Flow (2018)</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+        <section class="content-section">
+            <h3 class="section-title">Doramas Coreanos:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHg66eVMtcmZXYUo7EUukmMXO25rfi1a9_4AR08iYjLfeTjQ5qQOgsZwxXr1UOyk-y4lX3gyARHAHCbUqDvYa9aoD7PoB_ZhjrSwez1nPOtMyR00Dz7bnMKdq_4rf-2dG98eqZQU59jUt3/s1600/crash-landing-on-you0.png"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Crash Landing on You</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://images.justwatch.com/poster/185481575/s718/goblin-el-solitario-ser-inmortal.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Goblin</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVnN2Ly6P-0ebHdJti4ZALKDfCVZc2_to3DQ&s"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Kingdom</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/6/6e/DescendantsoftheSun.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Descendants of the Sun</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNjA1YmJiNTMtMDc4OC00ZjlkLTgyMjctYzRmMWJhMmZhMjkyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Vincenzo</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNWJhMDNjMWUtMWM5NS00MGZlLWI2MWQtODMxYjZiYmFlZjgzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">It's Okay to Not Be Okay</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Animes:</h3>
+
+            <div class="row">
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://preview.redd.it/was-dragon-ball-z-good-or-bad-v0-z9w9byr2d6pd1.png?auto=webp&s=511b035e8b5d32e6287d3cca9a94b8b16a7ef262"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Dragon Ball Z</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTNjNGU4NTUtYmVjMy00YjRiLTkxMWUtNzZkMDNiYjZhNmViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">One Piece</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZjliODY5MzQtMmViZC00MTZmLWFhMWMtMjMwM2I3OGY1MTRiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Attack on Titan</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7nDDeLEOH2BhPjzrumPmtr8q_9DoscU-S5g&s"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Jujutsu Kaisen</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://external-preview.redd.it/one-punch-man-season-3-new-visual-v0-bsQ6cFiCslO3HDdsPwudD53YOvchCFUAzjz6ZI666o8.jpg?auto=webp&s=1cb8ec346662bce212c6d81b390c23dfeadca033"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">One-Punch Man</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 d-none d-xl-block">
+                    <a href="explorar.html">
+                        <div class="movie-card">
+                            <div class="poster-container">
+                                <img src="https://es.web.img3.acsta.net/c_310_420/pictures/13/12/13/08/50/378271.jpg"
+                                    class="poster-img" alt="Movie">
+                                <div class="poster-overlay"><h5 class="movie-title">Naruto</h5></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 class="section-title">Próximas series</h3>
+            <div class="row">
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="movie-card">
+                        <div class="poster-container">
+                            <img src="https://pics.filmaffinity.com/his_hers-820639128-mmed.jpg"
+                                class="poster-img" alt="Movie">
+                            <div class="poster-overlay"><h5 class="movie-title">His & Hers (Él y Ella)</h5></div>
+                        </div>
+                        <div class="reviewer-info">
+                            <span class="text-custom-color small fw-bold">Estreno: 8 de enero de 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="movie-card">
+                        <div class="poster-container">
+                            <img src="https://m.media-amazon.com/images/M/MV5BZTIxMGY2YzgtMTNjMS00NGY3LWFmNmEtNmNkYmRjNGFiNDJiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                class="poster-img" alt="Movie">
+                            <div class="poster-overlay"><h5 class="movie-title">El Infiltrado (The Night Manager) Temporada 2</h5></div>
+                        </div>
+                        <div class="reviewer-info">
+                            <span class="text-custom-color small fw-bold">Estreno: 11 de enero de 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="movie-card">
+                        <div class="poster-container">
+                            <img src="https://es.web.img2.acsta.net/img/ba/66/ba66fe126ed131ed24c3cdb90d83b1db.png"
+                                class="poster-img" alt="Movie">
+                            <div class="poster-overlay"><h5 class="movie-title">El Caballero de los Siete Reinos</h5></div>
+                        </div>
+                        <div class="reviewer-info">
+                            <span class="text-custom-color small fw-bold">Estreno: 19 de enero de 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="movie-card">
+                        <div class="poster-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLwQxf2LI4kcDRqKvnErDOQxdE8-A5rjUFxUgOh_ICgHusGtKQJ0Afyi0-KntFafShSMbUrOpalHDCY99HeFP-lYLQCTzWecQQQzN68g&s"
+                                class="poster-img" alt="Movie">
+                            <div class="poster-overlay"><h5 class="movie-title">Wonder Man</h5></div>
+                        </div>
+                        <div class="reviewer-info">
+                            <span class="text-custom-color small fw-bold">Estreno: 27 de enero de 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="movie-card">
+                        <div class="poster-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRacfT0yUm98PLpAue406lO8b5AE0MxnHYyEQ&s"
+                                class="poster-img" alt="Movie">
+                            <div class="poster-overlay"><h5 class="movie-title">Daredevil: Born Again - Temporada 2</h5></div>
+                        </div>
+                        <div class="reviewer-info">
+                            <span class="text-custom-color small fw-bold">Estreno: Marzo de 2026 (Estimado)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="movie-card">
+                        <div class="poster-container">
+                            <img src="https://m.media-amazon.com/images/M/MV5BZGZkNThlYjYtOGI0MS00NGY3LWFmNmEtNmNkYmRjNGFiNDJiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                class="poster-img" alt="Movie">
+                            <div class="poster-overlay"><h5 class="movie-title">Vision Quest</h5></div>
+                        </div>
+                        <div class="reviewer-info">
+                            <span class="text-custom-color small fw-bold">Estreno: Mediados a finales de 2026 (Estimado)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- MODAL CORREGIDO (Solo aparece una vez aquí al final) -->
+    <div class="modal fade" id="suscritoModal" tabindex="-1" aria-labelledby="suscritoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 text-center bg-dark">
+                <h4 class="mb-3 text-white fw-bold" id="suscritoModalLabel">¡Exitoso!</h4>
+                <p class="text-white fw-bold">Ya se Añadio esta Peli a Tu Lista.</p>
+                <button type="button" class="btn btn-success fw-bold" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const nav = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
